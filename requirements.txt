@@ -1,0 +1,18 @@
+torch
+torchvision
+torchaudio
+transformers           # For pre-trained Hugging Face backbones (ViT and DistilBERT)
+
+datasets[vision]       # To easily stream/load the H&M or Amazon datasets
+pillow                 
+numpy
+pandas                 
+
+qdrant-client          # Python SDK for Qdrant (supports both local on-disk DB and server)
+
+fastapi                
+uvicorn                
+streamlit              # The frontend UI to search, input text, and view retrieved images
+
+tqdm                   
+scikit-learn           
