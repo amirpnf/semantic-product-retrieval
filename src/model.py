@@ -57,10 +57,10 @@ class StyleSpaceModel(nn.Module):
         text_features = text_outputs.last_hidden_state[:, 0, :]
         
         image_embeddings = self.vision_projection(image_features)
-        text_embeddings = self.text_peojection(text_features)
+        text_embeddings = self.text_projection(text_features)
         
-        image_embeddings /= image_embeddings.norm(dim=-1, keepdim=True)
-        text_embeddings /= text_embeddings.norm(dim=-1, keepdim=True)
+        image_embeddings = image_embeddings / image_embeddings.norm(dim=-1, keepdim=True)
+        text_embeddings = text_embeddings / text_embeddings.norm(dim=-1, keepdim=True)
         
         return image_embeddings, text_embeddings
         
