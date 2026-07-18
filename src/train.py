@@ -9,7 +9,7 @@ from model import StyleSpaceModel
 from loss import ContrastiveLoss
 
 CSV_PATH = "./data/cleaned_dataset.csv"
-BATCH_SIZE = 64          
+BATCH_SIZE = 16          
 EPOCHS = 5
 LEARNING_RATE = 5e-5
 WEIGHT_DECAY = 1e-2
@@ -43,7 +43,7 @@ def train_epoch(model, dataloader, optimizer, loss_fn, scaler, device):
         current_lr = optimizer.param_groups[0]['lr']
         pbar.set_postfix({
             "loss": f"{loss.item():.4f}", 
-            "temp": f"{loss_fn.temperature.exp().item():.4f}", 
+            "scale": f"{loss_fn.logit_scale.exp().item():.2f}", 
             "lr": f"{current_lr:.2e}"
         })
         
@@ -75,7 +75,7 @@ def main():
             "weight_decay": 0.0,
         },
         {
-            "params": [loss_fn.temperature],
+            "params": [loss_fn.logit_scale],
             "weight_decay": 0.0,
             "lr": LEARNING_RATE
         }
@@ -108,7 +108,9 @@ def main():
         if epoch_loss < best_loss:
             best_loss = epoch_loss
             best_path = os.path.join(CHECKPOINT_DIR, "stylespace_best.pt")
-            torch.save(model.state_dict(), best_path)
+            torch.save({
+                'model_state_dict': model.state_dict()
+            }, best_path)
             print(f"New best checkpoint saved to {best_path}")
             
     print("Training complete. Ready for vector indexing.")
