@@ -46,7 +46,7 @@ The core of the search engine relies on a custom dual-encoder architecture train
 
 - **Vector Database** : Qdrant
 
-- **Backend API** : FastAPI, Uvicorn
+- **Frontend & UI** : Streamlit
 
 - **Data Processing** : Pandans, Numpy, Pillow, Torchvision
 
@@ -103,7 +103,7 @@ PYTHONPATH=. python src/pipelines/train.py
 PYTHONPATH=. python src/pipelines/index_vector.py
 ```
 
-4. **Run the FastAPI Backend** : 
+4. **Run the Streamlit application** : 
 ```bash
 PYTHONPATH=. streamlit run src/api/app.py
 ```
