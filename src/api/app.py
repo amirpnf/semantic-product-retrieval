@@ -1,8 +1,12 @@
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
+
 import streamlit as st
 import torch
 from qdrant_client import QdrantClient
 from transformers import AutoTokenizer
-from model import StyleSpaceModel
+from src.models.model import StyleSpaceModel
 from PIL import Image
 
 QDRANT_PATH = "./qdrant_db"

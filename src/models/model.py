@@ -39,9 +39,9 @@ class StyleSpaceModel(nn.Module):
         )
         
         if freeze_backbones:
-            for param in self.vision_encoder.parameters:
+            for param in self.vision_encoder.parameters():
                 param.requires_grad = False
-            for param in self.text_encoder.paramaters:
+            for param in self.text_encoder.parameters():
                 param.requires_grad = False
                 
     def forward(self, images, text_batch):
@@ -63,4 +63,3 @@ class StyleSpaceModel(nn.Module):
         text_embeddings = text_embeddings / text_embeddings.norm(dim=-1, keepdim=True)
         
         return image_embeddings, text_embeddings
-        
