@@ -105,6 +105,6 @@ PYTHONPATH=. python src/pipelines/index_vector.py
 
 4. **Run the FastAPI Backend** : 
 ```bash
-PYTHONPATH=. uvicorn src.api.app:app --reload --host 0.0.0.0 --port 8000
+PYTHONPATH=. streamlit run src/api/app.py
 ```
 
